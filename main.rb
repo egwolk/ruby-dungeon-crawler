@@ -1,5 +1,6 @@
 require_relative 'player'
 require_relative 'enemy'
+require_relative 'battle'
 
 
 puts "Welcome to the Dungeon!"
@@ -11,4 +12,4 @@ puts "Hello. #{player.name}! You have #{player.hp} HP."
 puts "You enter the dungeon..."
 
 enemy = Enemy.random
-puts "A #{enemy.name} appears! (HP: #{enemy.hp})"
+Battle.new(player, enemy).start
