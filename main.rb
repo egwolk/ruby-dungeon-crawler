@@ -7,7 +7,7 @@ print "Enter your name: "
 name = gets.chomp
 
 player = Player.new(name)
-puts "Hello, #{player.name}! You have #{player.hp} HP."
+puts "Hello, #{player.name}! You have #{player.hp} HP and #{player.gold} gold."
 puts "You enter the dungeon..."
 
 room = 1
