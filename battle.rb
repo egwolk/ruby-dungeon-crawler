@@ -57,6 +57,40 @@ class Battle
   def show_inventory
     puts "\nYou check your bag..."
     @player.inventory.list
+    
+    return if @player.inventory.items.empty?
+    
+    puts "\nSelect an item to use (or 0 to go back):"
+    choice = gets.chomp.to_i
+    
+    if choice == 0
+      return
+    elsif choice > 0 && choice <= @player.inventory.items.size
+      item = @player.inventory.items[choice - 1]
+      use_item(item, choice - 1)
+    else
+      puts "Invalid selection."
+    end
+  end
+
+  def use_item(item, index)
+    case item.type
+    when :heal_potion
+      puts "\nDrink #{item.name} to restore #{item.value} HP? (Y/N)"
+      confirm = gets.chomp.downcase
+      
+      if confirm == "y"
+        old_hp = @player.hp
+        @player.hp += item.value
+        @player.hp = 100 if @player.hp > 100  # Cap at max HP
+        puts "You drank the potion and restored #{@player.hp - old_hp} HP!"
+        @player.inventory.remove_item(index)
+      else
+        puts "You decided not to use it."
+      end
+    else
+      puts "You can't use that right now."
+    end
   end
 
   def battle_over?
