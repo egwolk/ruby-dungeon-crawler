@@ -35,8 +35,12 @@ class Battle
 
     if @enemy.hp <= 0
       puts "You defeated the #{@enemy.name}!"
-      loot = Item.random_loot 
-      @player.inventory.add_item(loot)
+      if rand < 0.6  # 60% chance to get loot
+        loot = Item.random_loot 
+        @player.inventory.add_item(loot)
+      else
+        puts "But found no loot..."
+      end
       return
     end
     enemy_attack
