@@ -126,8 +126,9 @@ module BattleInventory
   def read_yes_no_choice
     loop do
       choice = STDIN.getch.downcase
+      next unless %w[y n].include?(choice)
       system("clear") || system("cls")
-      return choice if %w[y n].include?(choice)
+      return choice
     end
   end
 end
