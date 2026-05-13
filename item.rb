@@ -1,5 +1,5 @@
 class Item
-  attr_reader :name, :type, :value, :stat, :gold
+  attr_reader :name, :type, :value, :stat, :gold, :grade, :grade_mult
   attr_accessor :equipped
 
   TYPES = {
@@ -8,7 +8,7 @@ class Item
       type: :potion,  
       value: 30, 
       stat: "hp",
-      gold: 25
+      gold: 25,
     },
     sword: { 
       name: "Iron Sword",     
@@ -33,17 +33,27 @@ class Item
     }
   }
 
-  def initialize(type)
+  GRADE_MULT = {
+    C: 1,
+    B: 2,
+    A: 3,
+    S: 4
+  }
+
+  def initialize(type, grade = :C)
     item_data = TYPES[type]
     @name = item_data[:name]
-    @type = type
-    @value = item_data[:value]
+    @type = item_data[:type]
+    base_value = item_data[:value]
     @stat = item_data[:stat]
     @gold = item_data[:gold]
+    @grade = grade
+    @grade_mult = GRADE_MULT[grade] || 1
+    @value = base_value * @grade_mult
     @equipped = false
   end
 
-  def self.random_loot
-    new(TYPES.keys.sample)
+  def self.random_loot(grade = :C)
+    new(TYPES.keys.sample, grade)
   end
 end

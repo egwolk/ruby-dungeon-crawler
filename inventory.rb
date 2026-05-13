@@ -30,7 +30,7 @@ class Inventory
       puts "\n--- Inventory (#{@items.size}/#{@max_slots}) ---"
       @items.each_with_index do |item, index|
         equipped_mark = item.equipped ? " [equipped]" : ""
-        puts "#{index + 1}. #{item.name} #{item.stat} #{item.value}#{equipped_mark}"
+        puts "#{index + 1}. [#{item.grade}] #{item.name} #{item.stat} #{item.value}#{equipped_mark}"
       end
     end
   end

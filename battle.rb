@@ -1,7 +1,8 @@
 class Battle
-  def initialize(player, enemy)
+  def initialize(player, enemy, room)
     @player = player
     @enemy = enemy
+    @room = room
   end
 
   def start
@@ -39,11 +40,12 @@ class Battle
     if @enemy.hp <= 0
       puts "You defeated the #{@enemy.name}!"
       if rand < 0.6  # 60% chance to get loot
-        loot = Item.random_loot 
-        puts "You found a #{loot.name}!"
+        grade = select_grade_for_room(@room)
+        loot = Item.random_loot(grade)
+        puts "You found a #{loot.name} [#{loot.grade}]!"
         puts "Take it? (Y/N)"
         take_loot = gets.chomp.downcase
-        
+
         if take_loot == "y"
           @player.inventory.add_item(loot)
         else
@@ -149,5 +151,21 @@ class Battle
 
   def battle_over?
     @player.hp <= 0 || @enemy.hp <= 0
+  end
+
+  def select_grade_for_room(room)
+    # return one of :C, :B, :A, :S based on room depth probabilities
+    case room
+    when 1..2
+      choices = [:C, :C, :C, :B] # 75% C, 25% B
+    when 3..4
+      choices = [:C, :C, :B, :B, :A] # 40% C, 40% B, 20% A
+    when 5..7
+      choices = [:C, :B, :B, :A, :A, :S] # 16% C, 33% B, 33% A, 16% S approx
+    else
+      choices = [:C, :B, :A, :A, :S, :S] # deeper rooms favor A/S
+    end
+
+    choices.sample
   end
 end

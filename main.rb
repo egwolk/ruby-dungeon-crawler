@@ -16,7 +16,7 @@ loop do
   puts "\n--- Room #{room} ---"
 
   enemy = Enemy.random
-  Battle.new(player, enemy).start
+  Battle.new(player, enemy, room).start
 
   break if player.hp <= 0
 
