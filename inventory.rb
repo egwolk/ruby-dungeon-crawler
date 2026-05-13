@@ -37,12 +37,16 @@ class Inventory
 
   def equip_item(index, player)
     item = @items[index]
-    unless item && item.stat
+    equippable = [:weapon, :shield, :ring]
+    unless item && equippable.include?(item.type)
       puts "Can't equip that item."
       return
     end
 
-    existing = @items.find { |i| i.equipped && i.stat == item.stat }
+    slot = item.type
+
+    # If another item of same slot is equipped, switch to the new one
+    existing = @items.find { |i| i.equipped && i.type == slot }
     if existing && existing != item
       unequip_item(@items.index(existing), player)
     end
@@ -53,11 +57,13 @@ class Inventory
     end
 
     item.equipped = true
-    case item.stat
-    when "atk"
+    case slot
+    when :weapon
       player.atk += item.value
-    when "hp"
-      player.hp += item.value
+    when :shield
+      player.defense += item.value
+    when :ring
+      player.crit += item.value
     end
     puts "You equipped #{item.name}."
   end
@@ -70,11 +76,13 @@ class Inventory
     end
 
     item.equipped = false
-    case item.stat
-    when "atk"
+    case item.type
+    when :weapon
       player.atk -= item.value
-    when "hp"
-      player.hp -= item.value
+    when :shield
+      player.defense -= item.value
+    when :ring
+      player.crit -= item.value
     end
     puts "You unequipped #{item.name}."
   end
