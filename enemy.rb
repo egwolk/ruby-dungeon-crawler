@@ -3,9 +3,9 @@ class Enemy
   attr_reader :grade, :grade_mult
 
   TYPES = [
-    { name: "Goblin",   hp: 22,  atk: 4, },
-    { name: "Orc",      hp: 38,  atk: 7 },
-    { name: "Skeleton", hp: 30,  atk: 6  },
+    { name: "Goblin",   hp: 32,  atk: 7 },
+    { name: "Orc",      hp: 48,  atk: 13 },
+    { name: "Skeleton", hp: 40,  atk: 9  },
   ]
 
   def initialize(type)
