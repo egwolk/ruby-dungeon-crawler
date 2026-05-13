@@ -1,4 +1,6 @@
+# === COMBAT MECHANICS ===
 module BattleCombat
+  # Player attacks with damage calculation and critical hit chance
   def player_attack
     base = rand(1..@player.atk)
     crit_chance = (@player.crit || 0.0) + (@player.luck || 0.0)
@@ -36,6 +38,7 @@ module BattleCombat
     enemy_attack
   end
 
+  # Enemy attacks player with defense reduction
   def enemy_attack
     raw = rand(1..@enemy.atk)
     reduction = (@player.defense || 0)
@@ -47,6 +50,7 @@ module BattleCombat
     puts "You have been defeated..." if @player.hp <= 0
   end
 
+  # Attempt to escape from battle - uses luck stat
   def attempt_run
     base_chance = 0.1
     luck = @player.luck || 0.0
@@ -63,6 +67,7 @@ module BattleCombat
     end
   end
 
+  # Determine enemy grade based on room depth (affects difficulty)
   def select_grade_for_room(room)
     # return one of :C, :B, :A, :S based on room depth probabilities
     case room
@@ -79,6 +84,7 @@ module BattleCombat
     choices.sample
   end
 
+  # Loot drop probability increases with room depth
   def loot_drop_chance_for_room(room)
     case room
     when 1..2

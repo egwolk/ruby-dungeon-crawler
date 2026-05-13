@@ -1,7 +1,9 @@
+# === ENEMY CLASS ===
 class Enemy
   attr_accessor :name, :hp, :atk
   attr_reader :grade, :grade_mult
 
+  # Enemy type definitions
   TYPES = [
     { name: "Goblin",   hp: 32,  atk: 7 },
     { name: "Orc",      hp: 48,  atk: 13 },
@@ -29,6 +31,7 @@ class Enemy
     new(pool.sample)
   end
 
+  # Grade multipliers for difficulty scaling
   GRADE_MULT = {
     C: 1,
     B: 2,

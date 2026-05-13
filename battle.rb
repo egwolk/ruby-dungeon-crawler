@@ -3,6 +3,7 @@ require_relative 'battle_inventory'
 require_relative 'battle_items'
 require 'io/console'
 
+# === BATTLE CLASS ===
 class Battle
   include BattleCombat
   include BattleInventory
@@ -17,6 +18,7 @@ class Battle
     @enemy.apply_grade!(enemy_grade) if @enemy.respond_to?(:apply_grade!)
   end
 
+  # Main battle loop - player chooses actions each turn
   def start
     puts "\nA wild #{@enemy.name} appears! [HP: #{hp_display(@enemy.hp)}]"
     

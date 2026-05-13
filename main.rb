@@ -3,6 +3,7 @@ require_relative 'enemy'
 require_relative 'battle'
 require 'io/console'
 
+# === UTILITY ===
 def wait_for_enter
   loop do
     key = STDIN.getch
@@ -10,6 +11,7 @@ def wait_for_enter
   end
 end
 
+# === GAME STARTUP ===
 puts "Welcome to the Dungeon!"
 print "Press [ENTER] to start your adventure"
 wait_for_enter
@@ -28,6 +30,8 @@ puts "Hello, #{player.name}!"
 print "You enter the dungeon...Press [ENTER] to continue"
 wait_for_enter
 system("clear") || system("cls")
+
+# === MAIN GAME LOOP ===
 room = 1
 
 loop do

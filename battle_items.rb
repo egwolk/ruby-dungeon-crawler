@@ -1,4 +1,6 @@
+# === ITEM USAGE ===
 module BattleItems
+  # Apply item effects (currently only potions for HP recovery)
   def use_item(item, index)
     case item.type
     when :potion

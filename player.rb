@@ -1,6 +1,7 @@
 require_relative 'inventory'
 require_relative 'item'
 
+# === PLAYER CLASS ===
 class Player
   attr_accessor :name, :hp, :atk, :inventory, :defense, :crit, :luck
 

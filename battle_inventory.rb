@@ -1,6 +1,8 @@
+# === INVENTORY MANAGEMENT ===
 module BattleInventory
   require 'io/console'
 
+  # Display inventory and handle item selection
   def show_inventory
     loop do
       puts "\nYou check your bag..."
@@ -23,6 +25,7 @@ module BattleInventory
     end
   end
 
+  # Route item handling based on item type
   def show_item_menu(item, index)
     equippable = [:weapon, :shield, :ring, :hat]
     
@@ -35,6 +38,7 @@ module BattleInventory
     end
   end
 
+  # Menu for weapons, shields, rings, hats
   def handle_equippable_menu(item, index)
     puts "\nWhat would you like to do?"
     equipped_status = item.equipped ? "unequip" : "equip"
@@ -61,6 +65,7 @@ module BattleInventory
     end
   end
 
+  # Menu for consumable potions
   def handle_potion_menu(item, index)
     puts "\nWhat would you like to do?"
     puts "1. Drink"
@@ -82,6 +87,7 @@ module BattleInventory
     end
   end
 
+  # Menu for items that can't be used or equipped
   def handle_generic_menu(item, index)
     puts "\nWhat would you like to do?"
     puts "1. Discard"
@@ -100,6 +106,7 @@ module BattleInventory
     end
   end
 
+  # Confirm and remove item from inventory
   def discard_item_at(index)
     item = @player.inventory.items[index]
     print "Are you sure you want to discard #{item.name}? (Y/N)"
@@ -116,6 +123,7 @@ module BattleInventory
     end
   end
 
+  # Read single key input from player
   def read_menu_choice(valid_choices)
     loop do
       choice = STDIN.getch

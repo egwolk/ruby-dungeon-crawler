@@ -1,7 +1,9 @@
+# === ITEM CLASS ===
 class Item
   attr_reader :name, :type, :value, :stat, :grade, :grade_mult
   attr_accessor :equipped
 
+  # Available item types and their stats
   TYPES = {
     potion:  { 
       name: "Health Potion",  
@@ -36,6 +38,7 @@ class Item
     }
   }
 
+  # Grade multipliers for stat scaling
   GRADE_MULT = {
     C: 1,
     B: 2,

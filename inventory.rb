@@ -1,11 +1,14 @@
 require 'io/console'
 
+# === INVENTORY CLASS ===
 class Inventory
+  # Initialize empty inventory with slot limit
   def initialize(max_slots = 9)
     @items = []
     @max_slots = max_slots
   end
 
+  # === ITEM MANAGEMENT ===
   def add_item(item)
     if @items.size < @max_slots
       @items << item
@@ -37,6 +40,7 @@ class Inventory
     end
   end
 
+  # === EQUIPMENT ===
   def equip_item(index, player)
     item = @items[index]
     equippable = [:weapon, :shield, :ring, :hat]
@@ -112,6 +116,7 @@ class Inventory
     system("clear") || system("cls")
   end
 
+  # === UTILITY ===
   def size
     @items.size
   end
