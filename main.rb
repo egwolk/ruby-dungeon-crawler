@@ -33,7 +33,7 @@ room = 1
 loop do
   puts "\n--- Room #{room} ---"
 
-  enemy = Enemy.random
+  enemy = Enemy.random(room)
   Battle.new(player, enemy, room).start
 
   break if player.hp <= 0

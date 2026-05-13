@@ -15,7 +15,7 @@ module BattleCombat
 
     if @enemy.hp <= 0
       puts "You defeated the #{@enemy.name}!"
-      if rand < 0.6  # 60% chance to get loot
+      if rand < loot_drop_chance_for_room(@room)
         grade = select_grade_for_room(@room)
         loot = Item.random_loot(grade)
         puts "You found a #{loot.name} [#{loot.grade}]!"
@@ -48,10 +48,10 @@ module BattleCombat
   end
 
   def attempt_run
-    base_chance = 0.2
+    base_chance = 0.1
     luck = @player.luck || 0.0
     escape_chance = base_chance + luck
-    escape_chance = 0.95 if escape_chance > 0.95
+    escape_chance = 0.75 if escape_chance > 0.75
 
     if rand < escape_chance
       puts "You successfully escaped the room!"
@@ -67,15 +67,28 @@ module BattleCombat
     # return one of :C, :B, :A, :S based on room depth probabilities
     case room
     when 1..2
-      choices = [:C, :C, :C, :B] # 75% C, 25% B
+      choices = [:C, :C, :C, :C, :C] # keep the first rooms stable
     when 3..4
-      choices = [:C, :C, :B, :B, :A] # 40% C, 40% B, 20% A
+      choices = [:C, :C, :C, :B, :B, :A] # mostly C, some B, rare A
     when 5..7
-      choices = [:C, :B, :B, :A, :A, :S] # 16% C, 33% B, 33% A, 16% S approx
+      choices = [:C, :C, :B, :B, :A, :A, :S] # gradual rise in threat
     else
-      choices = [:C, :B, :A, :A, :S, :S] # deeper rooms favor A/S
+      choices = [:C, :B, :B, :A, :A, :S] # deeper rooms favor stronger grades
     end
 
     choices.sample
+  end
+
+  def loot_drop_chance_for_room(room)
+    case room
+    when 1..2
+      0.4
+    when 3..4
+      0.45
+    when 5..7
+      0.5
+    else
+      0.55
+    end
   end
 end

@@ -3,9 +3,9 @@ class Enemy
   attr_reader :grade, :grade_mult
 
   TYPES = [
-    { name: "Goblin",   hp: 30,  atk: 5, },
-    { name: "Orc",      hp: 60,  atk: 12 },
-    { name: "Skeleton", hp: 40,  atk: 8  },
+    { name: "Goblin",   hp: 22,  atk: 4, },
+    { name: "Orc",      hp: 38,  atk: 7 },
+    { name: "Skeleton", hp: 30,  atk: 6  },
   ]
 
   def initialize(type)
@@ -16,8 +16,17 @@ class Enemy
     @grade_mult = 1
   end
 
-  def self.random
-    new(TYPES.sample)
+  def self.random(room = 1)
+    pool = case room
+    when 1..2
+      [TYPES[0], TYPES[0], TYPES[0], TYPES[2]]
+    when 3..4
+      [TYPES[0], TYPES[0], TYPES[1], TYPES[2]]
+    else
+      [TYPES[0], TYPES[1], TYPES[1], TYPES[2], TYPES[2]]
+    end
+
+    new(pool.sample)
   end
 
   GRADE_MULT = {

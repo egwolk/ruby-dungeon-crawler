@@ -6,32 +6,32 @@ class Item
     potion:  { 
       name: "Health Potion",  
       type: :potion,  
-      value: 30, 
+      value: 25, 
       stat: "hp",
     },
     sword: { 
       name: "Iron Sword",     
       type: :weapon,       
-      value: 5, 
+      value: 4, 
       stat: "atk",
     },
     shield: { 
       name: "Sturdy shield",     
       type: :shield,       
-      value: 7, 
+      value: 5, 
       stat: "def",
       gold: 25
     },
     ring: { 
       name: "Ruby Ring",     
       type: :ring,       
-      value: 0.7, 
+      value: 0.4, 
       stat: "crit",
     },
     hat: { 
       name: "Lucky Hat",     
       type: :hat,       
-      value: 0.3, 
+      value: 0.2, 
       stat: "luck",
     }
   }
