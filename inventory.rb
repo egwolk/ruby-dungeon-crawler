@@ -25,7 +25,7 @@ class Inventory
 
   def list
     if @items.empty?
-      puts "Your inventory is empty."
+      puts "It is empty."
     else
       puts "\n--- Inventory (#{@items.size}/#{@max_slots}) ---"
       @items.each_with_index do |item, index|
@@ -40,6 +40,9 @@ class Inventory
     equippable = [:weapon, :shield, :ring, :hat]
     unless item && equippable.include?(item.type)
       puts "Can't equip that item."
+      puts "[ENTER]continue"
+      gets
+      system("clear") || system("cls")
       return
     end
 
@@ -53,6 +56,9 @@ class Inventory
 
     if item.equipped
       puts "#{item.name} is already equipped."
+      puts "[ENTER]continue"
+      gets
+      system("clear") || system("cls")
       return
     end
 
@@ -70,12 +76,18 @@ class Inventory
       player.luck = 1.0 if player.luck > 1.0
     end
     puts "You equipped #{item.name}."
+    puts "[ENTER]continue"
+    gets
+    system("clear") || system("cls")
   end
 
   def unequip_item(index, player)
     item = @items[index]
     unless item && item.equipped
       puts "That item is not equipped."
+      puts "[ENTER]continue"
+      gets
+      system("clear") || system("cls")
       return
     end
 
@@ -93,6 +105,9 @@ class Inventory
       player.luck = 0.0 if player.luck < 0.0
     end
     puts "You unequipped #{item.name}."
+    puts "[ENTER]continue"
+    gets
+    system("clear") || system("cls")
   end
 
   def size

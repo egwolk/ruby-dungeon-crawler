@@ -2,7 +2,7 @@ module BattleItems
   def use_item(item, index)
     case item.type
     when :potion
-      puts "\nDrink #{item.name} to restore #{item.value} HP? (Y/N)"
+      print "\nDrink #{item.name} to restore #{item.value} HP? (Y/N)"
       confirm = gets.chomp.downcase
       
       if confirm == "y"

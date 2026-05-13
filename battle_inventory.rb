@@ -38,6 +38,7 @@ module BattleInventory
     puts "3. Go back"
     
     choice = gets.chomp
+    system("clear") || system("cls")
     
     case choice
     when "1"
@@ -62,6 +63,7 @@ module BattleInventory
     puts "3. Go back"
     
     choice = gets.chomp
+    system("clear") || system("cls")
     
     case choice
     when "1"
@@ -81,6 +83,7 @@ module BattleInventory
     puts "2. Go back"
     
     choice = gets.chomp
+    system("clear") || system("cls")
     
     case choice
     when "1"
@@ -94,7 +97,7 @@ module BattleInventory
 
   def discard_item_at(index)
     item = @player.inventory.items[index]
-    puts "Are you sure you want to discard #{item.name}? (Y/N)"
+    print "Are you sure you want to discard #{item.name}? (Y/N)"
     confirm = gets.chomp.downcase
     
     if confirm == "y"

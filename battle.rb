@@ -18,7 +18,7 @@ class Battle
 
   def start
     puts "\nA wild #{@enemy.name} appears! [HP: #{@enemy.hp}]"
-
+    
     loop do
       puts "Adventurer #{@player.name} stats [HP: #{@player.hp} | ATK: #{@player.atk} | DEF: #{@player.defense} | CRIT: #{@player.crit} | LUCK: #{@player.luck}]"
       puts "\nWhat will you do?"
@@ -28,6 +28,7 @@ class Battle
       puts "4. Give Up"
 
       choice = gets.chomp
+      system("clear") || system("cls")
 
       case choice
       when "1" then player_attack

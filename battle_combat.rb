@@ -19,16 +19,17 @@ module BattleCombat
         grade = select_grade_for_room(@room)
         loot = Item.random_loot(grade)
         puts "You found a #{loot.name} [#{loot.grade}]!"
-        puts "Take it? (Y/N)"
+        print "Take it? (Y/N)"
         take_loot = gets.chomp.downcase
+        system("clear") || system("cls")
 
         if take_loot == "y"
           @player.inventory.add_item(loot)
         else
-          puts "You left the #{loot.name} behind."
+          puts "You left the #{loot.name} behind..."
         end
       else
-        puts "But found no loot..."
+        print "But found no loot..."
       end
       return
     end
