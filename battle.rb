@@ -18,7 +18,7 @@ class Battle
   end
 
   def start
-    puts "\nA wild #{@enemy.name} appears! [HP: #{@enemy.hp}]"
+    puts "\nA wild #{@enemy.name} appears! [HP: #{hp_display(@enemy.hp)}]"
     
     loop do
       puts "Adventurer #{@player.name} stats [HP: #{@player.hp} | ATK: #{@player.atk} | DEF: #{@player.defense} | CRIT: #{@player.crit} | LUCK: #{@player.luck}]"
@@ -48,6 +48,10 @@ class Battle
   end
 
   private
+
+  def hp_display(value)
+    [value.to_i, 0].max
+  end
 
   def read_menu_choice(valid_choices)
     loop do

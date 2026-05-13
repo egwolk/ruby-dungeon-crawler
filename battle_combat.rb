@@ -6,11 +6,11 @@ module BattleCombat
     if rand < crit_chance
       damage = (base * 2).to_i
       @enemy.hp -= damage
-      puts "You land a critical hit for #{damage} damage! [#{@enemy.name} HP: #{@enemy.hp}]"
+      puts "You land a critical hit for #{damage} damage! [#{@enemy.name} HP: #{hp_display(@enemy.hp)}]"
     else
       damage = base
       @enemy.hp -= damage
-      puts "You attack the #{@enemy.name} for #{damage} damage! [#{@enemy.name} HP: #{@enemy.hp}]"
+      puts "You attack the #{@enemy.name} for #{damage} damage! [#{@enemy.name} HP: #{hp_display(@enemy.hp)}]"
     end
 
     if @enemy.hp <= 0
@@ -42,7 +42,7 @@ module BattleCombat
     damage = raw - reduction
     damage = 0 if damage < 0
     @player.hp -= damage
-    puts "The #{@enemy.name} attacks you for #{damage} damage!"
+    puts "The #{@enemy.name} attacks you for #{damage} damage! [#{@player.name} HP: #{hp_display(@player.hp)}]"
 
     puts "You have been defeated..." if @player.hp <= 0
   end
