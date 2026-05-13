@@ -3,9 +3,9 @@ class Item
   attr_accessor :equipped
 
   TYPES = {
-    heal_potion:  { 
+    potion:  { 
       name: "Health Potion",  
-      type: :heal_potion,  
+      type: :potion,  
       value: 30, 
       stat: "hp",
       gold: 25
@@ -15,6 +15,20 @@ class Item
       type: :weapon,       
       value: 5, 
       stat: "atk",
+      gold: 25
+    },
+    shield: { 
+      name: "Sturdy shield",     
+      type: :shield,       
+      value: 7, 
+      stat: "def",
+      gold: 25
+    },
+    ring: { 
+      name: "Ruby Ring",     
+      type: :ring,       
+      value: 0.7, 
+      stat: "crit",
       gold: 25
     }
   }

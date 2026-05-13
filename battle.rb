@@ -8,7 +8,7 @@ class Battle
     puts "\nA wild #{@enemy.name} appears! [HP: #{@enemy.hp}]"
 
     loop do
-      puts "Adventurer #{@player.name} stats [HP: #{@player.hp} | ATK: #{@player.atk}]"
+      puts "Adventurer #{@player.name} stats [HP: #{@player.hp} | ATK: #{@player.atk} | DEF: #{@player.defense} | CRIT: #{@player.crit}]"
       puts "\nWhat will you do?"
       puts "1. Attack"
       puts "2. Inventory"
