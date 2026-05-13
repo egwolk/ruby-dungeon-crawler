@@ -3,7 +3,7 @@ module BattleItems
     case item.type
     when :potion
       print "\nDrink #{item.name} to restore #{item.value} HP? (Y/N)"
-      confirm = gets.chomp.downcase
+      confirm = read_yes_no_choice
       
       if confirm == "y"
         old_hp = @player.hp

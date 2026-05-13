@@ -1,4 +1,6 @@
 module BattleInventory
+  require 'io/console'
+
   def show_inventory
     loop do
       puts "\nYou check your bag..."
@@ -7,14 +9,14 @@ module BattleInventory
       return if @player.inventory.items.empty?
 
       puts "\nSelect item number or '0' to go back:"
-      choice = gets.chomp.to_i
+      choice = read_menu_choice((0..9).map(&:to_s))
       system("clear") || system("cls")
 
-      if choice == 0
+      if choice == "0"
         return
-      elsif choice > 0 && choice <= @player.inventory.items.size
-        item = @player.inventory.items[choice - 1]
-        show_item_menu(item, choice - 1)
+      elsif choice.to_i > 0 && choice.to_i <= @player.inventory.items.size
+        item = @player.inventory.items[choice.to_i - 1]
+        show_item_menu(item, choice.to_i - 1)
       else
         puts "Invalid selection."
       end
@@ -40,7 +42,7 @@ module BattleInventory
     puts "2. Discard"
     puts "3. Go back"
     
-    choice = gets.chomp
+    choice = read_menu_choice(%w[1 2 3])
     system("clear") || system("cls")
     
     case choice
@@ -65,7 +67,7 @@ module BattleInventory
     puts "2. Discard"
     puts "3. Go back"
     
-    choice = gets.chomp
+    choice = read_menu_choice(%w[1 2 3])
     system("clear") || system("cls")
     
     case choice
@@ -85,7 +87,7 @@ module BattleInventory
     puts "1. Discard"
     puts "2. Go back"
     
-    choice = gets.chomp
+    choice = read_menu_choice(%w[1 2])
     system("clear") || system("cls")
     
     case choice
@@ -101,7 +103,7 @@ module BattleInventory
   def discard_item_at(index)
     item = @player.inventory.items[index]
     print "Are you sure you want to discard #{item.name}? (Y/N)"
-    confirm = gets.chomp.downcase
+    confirm = read_yes_no_choice
     
     if confirm == "y"
       if item.equipped
@@ -111,6 +113,21 @@ module BattleInventory
       puts "You discarded the #{item.name}."
     else
       puts "You decided to keep it."
+    end
+  end
+
+  def read_menu_choice(valid_choices)
+    loop do
+      choice = STDIN.getch
+      return choice if valid_choices.include?(choice)
+    end
+  end
+
+  def read_yes_no_choice
+    loop do
+      choice = STDIN.getch.downcase
+      system("clear") || system("cls")
+      return choice if %w[y n].include?(choice)
     end
   end
 end

@@ -20,7 +20,7 @@ module BattleCombat
         loot = Item.random_loot(grade)
         puts "You found a #{loot.name} [#{loot.grade}]!"
         print "Take it? (Y/N)"
-        take_loot = gets.chomp.downcase
+        take_loot = read_yes_no_choice
         system("clear") || system("cls")
 
         if take_loot == "y"

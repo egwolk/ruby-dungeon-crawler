@@ -1,6 +1,7 @@
 require_relative 'battle_combat'
 require_relative 'battle_inventory'
 require_relative 'battle_items'
+require 'io/console'
 
 class Battle
   include BattleCombat
@@ -27,7 +28,7 @@ class Battle
       puts "3. Run"
       puts "4. Give Up"
 
-      choice = gets.chomp
+      choice = read_menu_choice(%w[1 2 3 4])
       system("clear") || system("cls")
 
       case choice
@@ -47,6 +48,13 @@ class Battle
   end
 
   private
+
+  def read_menu_choice(valid_choices)
+    loop do
+      choice = STDIN.getch
+      return choice if valid_choices.include?(choice)
+    end
+  end
 
   def battle_over?
     @player.hp <= 0 || @enemy.hp <= 0
