@@ -1,20 +1,23 @@
 module BattleInventory
   def show_inventory
-    puts "\nYou check your bag..."
-    @player.inventory.list
+    loop do
+      puts "\nYou check your bag..."
+      @player.inventory.list
 
-    return if @player.inventory.items.empty?
+      return if @player.inventory.items.empty?
 
-    puts "\nSelect item number or '0' to go back:"
-    choice = gets.chomp.to_i
+      puts "\nSelect item number or '0' to go back:"
+      choice = gets.chomp.to_i
+      system("clear") || system("cls")
 
-    if choice == 0
-      return
-    elsif choice > 0 && choice <= @player.inventory.items.size
-      item = @player.inventory.items[choice - 1]
-      show_item_menu(item, choice - 1)
-    else
-      puts "Invalid selection."
+      if choice == 0
+        return
+      elsif choice > 0 && choice <= @player.inventory.items.size
+        item = @player.inventory.items[choice - 1]
+        show_item_menu(item, choice - 1)
+      else
+        puts "Invalid selection."
+      end
     end
   end
 
