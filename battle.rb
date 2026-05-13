@@ -3,13 +3,16 @@ class Battle
     @player = player
     @enemy = enemy
     @room = room
+    # scale enemy by room-based grade when battle starts
+    enemy_grade = select_grade_for_room(@room)
+    @enemy.apply_grade!(enemy_grade) if @enemy.respond_to?(:apply_grade!)
   end
 
   def start
     puts "\nA wild #{@enemy.name} appears! [HP: #{@enemy.hp}]"
 
     loop do
-      puts "Adventurer #{@player.name} stats [HP: #{@player.hp} | ATK: #{@player.atk} | DEF: #{@player.defense} | CRIT: #{@player.crit}]"
+      puts "Adventurer #{@player.name} stats [HP: #{@player.hp} | ATK: #{@player.atk} | DEF: #{@player.defense} | CRIT: #{@player.crit} | LUCK: #{@player.luck}]"
       puts "\nWhat will you do?"
       puts "1. Attack"
       puts "2. Inventory"
