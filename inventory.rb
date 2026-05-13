@@ -77,7 +77,7 @@ class Inventory
       player.luck += item.value
       player.luck = 1.0 if player.luck > 1.0
     end
-    puts "You equipped #{item.name}."
+    puts "You equipped #{item.name} #{item.grade}."
     puts "[ENTER]continue"
     wait_for_enter
     system("clear") || system("cls")
@@ -106,7 +106,7 @@ class Inventory
       player.luck -= item.value
       player.luck = 0.0 if player.luck < 0.0
     end
-    puts "You unequipped #{item.name}."
+    puts "You unequipped #{item.name} #{item.grade}."
     puts "[ENTER]continue"
     wait_for_enter
     system("clear") || system("cls")
