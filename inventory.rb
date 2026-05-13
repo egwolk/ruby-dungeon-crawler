@@ -37,7 +37,7 @@ class Inventory
 
   def equip_item(index, player)
     item = @items[index]
-    equippable = [:weapon, :shield, :ring]
+    equippable = [:weapon, :shield, :ring, :hat]
     unless item && equippable.include?(item.type)
       puts "Can't equip that item."
       return
@@ -64,6 +64,10 @@ class Inventory
       player.defense += item.value
     when :ring
       player.crit += item.value
+      player.crit = 1.0 if player.crit > 1.0
+    when :hat
+      player.luck += item.value
+      player.luck = 1.0 if player.luck > 1.0
     end
     puts "You equipped #{item.name}."
   end
@@ -83,6 +87,10 @@ class Inventory
       player.defense -= item.value
     when :ring
       player.crit -= item.value
+      player.crit = 0.0 if player.crit < 0.0
+    when :hat
+      player.luck -= item.value
+      player.luck = 0.0 if player.luck < 0.0
     end
     puts "You unequipped #{item.name}."
   end

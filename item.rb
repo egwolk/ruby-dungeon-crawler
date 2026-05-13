@@ -29,7 +29,14 @@ class Item
       type: :ring,       
       value: 0.7, 
       stat: "crit",
-      gold: 25
+      gold: 25,
+    },
+    hat: { 
+      name: "Lucky Hat",     
+      type: :hat,       
+      value: 0.3, 
+      stat: "luck",
+      gold: 25,
     }
   }
 
