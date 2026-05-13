@@ -1,5 +1,6 @@
 class Item
   attr_reader :name, :type, :value, :stat, :gold
+  attr_accessor :equipped
 
   TYPES = {
     heal_potion:  { 
@@ -25,6 +26,7 @@ class Item
     @value = item_data[:value]
     @stat = item_data[:stat]
     @gold = item_data[:gold]
+    @equipped = false
   end
 
   def self.random_loot

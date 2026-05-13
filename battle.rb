@@ -20,7 +20,7 @@ class Battle
       when "1" then player_attack
       when "2" then show_inventory
       when "3" then puts "Run coming soon!"
-      when "4" then puths "Coming soon!"
+      when "4" then puts "Coming soon!"
       else puts "Invalid choice."
       end
 
@@ -67,17 +67,33 @@ class Battle
   def show_inventory
     puts "\nYou check your bag..."
     @player.inventory.list
-    
+
     return if @player.inventory.items.empty?
-    
+
     puts "\nWhat would you like to do?"
-    puts "Enter item number to use, 'd' to discard, or '0' to go back:"
+    puts "Enter item number to use, 'e' to equip, 'u' to unequip, 'd' to discard, or '0' to go back:"
     choice = gets.chomp.downcase
-    
+
     if choice == "0"
       return
     elsif choice == "d"
       discard_item
+    elsif choice == "e"
+      puts "Which item number to equip?"
+      num = gets.chomp.to_i
+      if num > 0 && num <= @player.inventory.items.size
+        @player.inventory.equip_item(num - 1, @player)
+      else
+        puts "Invalid selection."
+      end
+    elsif choice == "u"
+      puts "Which item number to unequip?"
+      num = gets.chomp.to_i
+      if num > 0 && num <= @player.inventory.items.size
+        @player.inventory.unequip_item(num - 1, @player)
+      else
+        puts "Invalid selection."
+      end
     elsif choice.to_i > 0 && choice.to_i <= @player.inventory.items.size
       item = @player.inventory.items[choice.to_i - 1]
       use_item(item, choice.to_i - 1)
@@ -96,6 +112,10 @@ class Battle
       confirm = gets.chomp.downcase
       
       if confirm == "y"
+        # If item is equipped, unequip first to adjust stats
+        if item.equipped
+          @player.inventory.unequip_item(choice - 1, @player)
+        end
         @player.inventory.remove_item(choice - 1)
         puts "You discarded the #{item.name}."
       else

@@ -29,9 +29,54 @@ class Inventory
     else
       puts "\n--- Inventory (#{@items.size}/#{@max_slots}) ---"
       @items.each_with_index do |item, index|
-        puts "#{index + 1}. #{item.name} (#{item.type})"
+        equipped_mark = item.equipped ? " [equipped]" : ""
+        puts "#{index + 1}. #{item.name} #{item.stat} #{item.value}#{equipped_mark}"
       end
     end
+  end
+
+  def equip_item(index, player)
+    item = @items[index]
+    unless item && item.stat
+      puts "Can't equip that item."
+      return
+    end
+
+    existing = @items.find { |i| i.equipped && i.stat == item.stat }
+    if existing && existing != item
+      unequip_item(@items.index(existing), player)
+    end
+
+    if item.equipped
+      puts "#{item.name} is already equipped."
+      return
+    end
+
+    item.equipped = true
+    case item.stat
+    when "atk"
+      player.atk += item.value
+    when "hp"
+      player.hp += item.value
+    end
+    puts "You equipped #{item.name}."
+  end
+
+  def unequip_item(index, player)
+    item = @items[index]
+    unless item && item.equipped
+      puts "That item is not equipped."
+      return
+    end
+
+    item.equipped = false
+    case item.stat
+    when "atk"
+      player.atk -= item.value
+    when "hp"
+      player.hp -= item.value
+    end
+    puts "You unequipped #{item.name}."
   end
 
   def size
