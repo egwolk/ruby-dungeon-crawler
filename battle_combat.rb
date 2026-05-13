@@ -40,7 +40,7 @@ module BattleCombat
     raw = rand(1..@enemy.atk)
     reduction = (@player.defense || 0)
     damage = raw - reduction
-    damage = 0 if damage < 0
+    damage = 1 if damage <= 0
     @player.hp -= damage
     puts "The #{@enemy.name} attacks you for #{damage} damage! [#{@player.name} HP: #{hp_display(@player.hp)}]"
 
