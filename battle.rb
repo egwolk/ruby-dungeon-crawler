@@ -37,7 +37,15 @@ class Battle
       puts "You defeated the #{@enemy.name}!"
       if rand < 0.6  # 60% chance to get loot
         loot = Item.random_loot 
-        @player.inventory.add_item(loot)
+        puts "You found a #{loot.name}!"
+        puts "Take it? (Y/N)"
+        take_loot = gets.chomp.downcase
+        
+        if take_loot == "y"
+          @player.inventory.add_item(loot)
+        else
+          puts "You left the #{loot.name} behind."
+        end
       else
         puts "But found no loot..."
       end
@@ -60,14 +68,37 @@ class Battle
     
     return if @player.inventory.items.empty?
     
-    puts "\nSelect an item to use (or 0 to go back):"
+    puts "\nWhat would you like to do?"
+    puts "Enter item number to use, 'd' to discard, or '0' to go back:"
+    choice = gets.chomp.downcase
+    
+    if choice == "0"
+      return
+    elsif choice == "d"
+      discard_item
+    elsif choice.to_i > 0 && choice.to_i <= @player.inventory.items.size
+      item = @player.inventory.items[choice.to_i - 1]
+      use_item(item, choice.to_i - 1)
+    else
+      puts "Invalid selection."
+    end
+  end
+
+  def discard_item
+    puts "\nWhich item do you want to discard? (Enter number):"
     choice = gets.chomp.to_i
     
-    if choice == 0
-      return
-    elsif choice > 0 && choice <= @player.inventory.items.size
+    if choice > 0 && choice <= @player.inventory.items.size
       item = @player.inventory.items[choice - 1]
-      use_item(item, choice - 1)
+      puts "Are you sure you want to discard #{item.name}? (Y/N)"
+      confirm = gets.chomp.downcase
+      
+      if confirm == "y"
+        @player.inventory.remove_item(choice - 1)
+        puts "You discarded the #{item.name}."
+      else
+        puts "You decided to keep it."
+      end
     else
       puts "Invalid selection."
     end
