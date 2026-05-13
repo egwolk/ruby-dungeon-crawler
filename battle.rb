@@ -12,6 +12,7 @@ class Battle
       puts "1. Attack"
       puts "2. Inventory"
       puts "3. Run"
+      puts "4. Give Up"
 
       choice = gets.chomp
 
@@ -19,6 +20,7 @@ class Battle
       when "1" then player_attack
       when "2" then show_inventory
       when "3" then puts "Run coming soon!"
+      when "4" then puths "Coming soon!"
       else puts "Invalid choice."
       end
 
