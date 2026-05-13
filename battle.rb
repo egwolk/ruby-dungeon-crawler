@@ -5,9 +5,10 @@ class Battle
   end
 
   def start
-    puts "\nA wild #{@enemy.name} appears! (HP: #{@enemy.hp})"
+    puts "\nA wild #{@enemy.name} appears! [HP: #{@enemy.hp}]"
 
     loop do
+      puts "Adventurer #{@player.name} stats [HP: #{@player.hp} | ATK: #{@player.atk}]"
       puts "\nWhat will you do?"
       puts "1. Attack"
       puts "2. Inventory"
@@ -33,7 +34,7 @@ class Battle
   def player_attack
     damage = rand(1..@player.atk)
     @enemy.hp -= damage
-    puts "You attack the #{@enemy.name} for #{damage} damage! (#{@enemy.name} HP: #{@enemy.hp})"
+    puts "You attack the #{@enemy.name} for #{damage} damage! [#{@enemy.name} HP: #{@enemy.hp}]"
 
     if @enemy.hp <= 0
       puts "You defeated the #{@enemy.name}!"
@@ -59,7 +60,7 @@ class Battle
   def enemy_attack
     damage = rand(1..@enemy.atk)
     @player.hp -= damage
-    puts "The #{@enemy.name} attacks you for #{damage} damage! (Your HP: #{@player.hp})"
+    puts "The #{@enemy.name} attacks you for #{damage} damage!"
 
     puts "You have been defeated..." if @player.hp <= 0
   end
