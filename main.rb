@@ -1,10 +1,18 @@
 require_relative 'player'
 require_relative 'enemy'
 require_relative 'battle'
+require 'io/console'
+
+def wait_for_enter
+  loop do
+    key = STDIN.getch
+    return if key == "\r" || key == "\n"
+  end
+end
 
 puts "Welcome to the Dungeon!"
 print "Press [ENTER] to start your adventure"
-gets
+wait_for_enter
 system("clear") || system("cls")
 
 print "Enter your name: "
@@ -18,7 +26,7 @@ system("clear") || system("cls")
 player = Player.new(name)
 puts "Hello, #{player.name}!"
 print "You enter the dungeon...Press [ENTER] to continue"
-gets
+wait_for_enter
 system("clear") || system("cls")
 room = 1
 
@@ -32,8 +40,11 @@ loop do
 
   room += 1
   print "\nYou move deeper into the dungeon...[ENTER]continue"
-  gets
+  wait_for_enter
   system("clear") || system("cls")
 end
 
 puts "\nGame over! You made it through #{room - 1} room(s). Thanks for playing!"
+puts "[ENTER]continue..."
+wait_for_enter
+system("clear") || system("cls")

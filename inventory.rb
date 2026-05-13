@@ -1,5 +1,7 @@
+require 'io/console'
+
 class Inventory
-  def initialize(max_slots = 10)
+  def initialize(max_slots = 9)
     @items = []
     @max_slots = max_slots
   end
@@ -41,7 +43,7 @@ class Inventory
     unless item && equippable.include?(item.type)
       puts "Can't equip that item."
       puts "[ENTER]continue"
-      gets
+      wait_for_enter
       system("clear") || system("cls")
       return
     end
@@ -57,7 +59,7 @@ class Inventory
     if item.equipped
       puts "#{item.name} is already equipped."
       puts "[ENTER]continue"
-      gets
+      wait_for_enter
       system("clear") || system("cls")
       return
     end
@@ -77,7 +79,7 @@ class Inventory
     end
     puts "You equipped #{item.name}."
     puts "[ENTER]continue"
-    gets
+    wait_for_enter
     system("clear") || system("cls")
   end
 
@@ -86,7 +88,7 @@ class Inventory
     unless item && item.equipped
       puts "That item is not equipped."
       puts "[ENTER]continue"
-      gets
+      wait_for_enter
       system("clear") || system("cls")
       return
     end
@@ -106,7 +108,7 @@ class Inventory
     end
     puts "You unequipped #{item.name}."
     puts "[ENTER]continue"
-    gets
+    wait_for_enter
     system("clear") || system("cls")
   end
 
@@ -116,5 +118,12 @@ class Inventory
 
   def full?
     @items.size >= @max_slots
+  end
+
+  def wait_for_enter
+    loop do
+      key = STDIN.getch
+      return if key == "\r" || key == "\n"
+    end
   end
 end
