@@ -27,7 +27,9 @@ class Battle
       when "3"
         escaped = attempt_run
         break if escaped
-      when "4" then puts "Coming soon!"
+      when "4"
+        puts "Adventurer #{@player.name} surrenders and could not defeat the dungeon."
+        @player.hp = 0
       else puts "Invalid choice."
       end
 
