@@ -9,6 +9,10 @@ system("clear") || system("cls")
 
 print "Enter your name: "
 name = gets.chomp
+while name.strip.empty?
+  print "Name cannot be blank. Enter your name: "
+  name = gets.chomp
+end
 system("clear") || system("cls")
 
 player = Player.new(name)
