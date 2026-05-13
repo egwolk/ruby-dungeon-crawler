@@ -24,7 +24,9 @@ class Battle
       case choice
       when "1" then player_attack
       when "2" then show_inventory
-      when "3" then puts "Run coming soon!"
+      when "3"
+        escaped = attempt_run
+        break if escaped
       when "4" then puts "Coming soon!"
       else puts "Invalid choice."
       end
@@ -161,6 +163,22 @@ class Battle
       end
     else
       puts "You can't use that right now."
+    end
+  end
+
+  def attempt_run
+    base_chance = 0.2
+    luck = @player.luck || 0.0
+    escape_chance = base_chance + luck
+    escape_chance = 0.95 if escape_chance > 0.95
+
+    if rand < escape_chance
+      puts "You successfully escaped the room!"
+      return true
+    else
+      puts "You failed to escape! The #{@enemy.name} strikes as you flee..."
+      enemy_attack
+      return false
     end
   end
 
