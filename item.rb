@@ -1,5 +1,5 @@
 class Item
-  attr_reader :name, :type, :value, :stat, :gold, :grade, :grade_mult
+  attr_reader :name, :type, :value, :stat, :grade, :grade_mult
   attr_accessor :equipped
 
   TYPES = {
@@ -8,14 +8,12 @@ class Item
       type: :potion,  
       value: 30, 
       stat: "hp",
-      gold: 25,
     },
     sword: { 
       name: "Iron Sword",     
       type: :weapon,       
       value: 5, 
       stat: "atk",
-      gold: 25
     },
     shield: { 
       name: "Sturdy shield",     
@@ -29,14 +27,12 @@ class Item
       type: :ring,       
       value: 0.7, 
       stat: "crit",
-      gold: 25,
     },
     hat: { 
       name: "Lucky Hat",     
       type: :hat,       
       value: 0.3, 
       stat: "luck",
-      gold: 25,
     }
   }
 
