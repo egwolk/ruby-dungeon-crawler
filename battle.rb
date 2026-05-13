@@ -21,7 +21,7 @@ class Battle
     puts "\nA wild #{@enemy.name} appears! [HP: #{hp_display(@enemy.hp)}]"
     
     loop do
-      puts "Adventurer #{@player.name} stats [HP: #{@player.hp} | ATK: #{@player.atk} | DEF: #{@player.defense} | CRIT: x#{@player.crit} | LUCK: #{@player.luck*100}%]"
+      puts "Adventurer #{@player.name} stats [HP: #{@player.hp} | ATK: #{@player.atk} | DEF: #{@player.defense} | CRIT: x#{@player.crit.round(2)} | LUCK: #{(@player.luck*100).round(1)}%]"
       puts "\nWhat will you do?"
       puts "1. Attack"
       puts "2. Inventory"
