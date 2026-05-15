@@ -40,10 +40,10 @@ class Item
 
   # Grade multipliers for stat scaling
   GRADE_MULT = {
-    C: 1,
-    B: 2,
-    A: 3,
-    S: 4
+    C: 1.0,
+    B: 1.25,
+    A: 1.5,
+    S: 2.0
   }
 
   def initialize(type, grade = :C)

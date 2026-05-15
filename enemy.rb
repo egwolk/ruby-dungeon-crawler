@@ -33,10 +33,10 @@ class Enemy
 
   # Grade multipliers for difficulty scaling
   GRADE_MULT = {
-    C: 1,
-    B: 2,
-    A: 3,
-    S: 4
+    C: 1.0,
+    B: 1.3,
+    A: 1.6,
+    S: 2.2
   }
 
   # Apply a grade to this enemy, scaling hp and atk
